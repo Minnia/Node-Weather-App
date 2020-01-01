@@ -29,19 +29,18 @@ app.post("/", (req, res) => {
       let weather = JSON.parse(body);
 
       console.log("21", weather);
-      // if (weather.main === undefined) {
-      //   res.render("index", {
-      //     weather: null,
-      //     error: "Error! Please try again later"
-      //   });
-      // } else {
-      let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}`;
-      console.log("38", weatherText);
-      res.render("index", { weather: weatherText, error: null });
-      // }
+      if (weather.main === undefined) {
+        res.render("index", {
+          weather: null,
+          error: "Error! Please try again later"
+        });
+      } else {
+        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}`;
+        console.log("38", weatherText);
+        res.render("index", { weather: weatherText, error: null });
+      }
     }
   });
-  res.render("index");
 });
 
 app.listen(4000, function() {
