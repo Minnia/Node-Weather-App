@@ -21,22 +21,18 @@ app.post("/", (req, res) => {
   let city = req.body.city;
   let country = req.body.country;
   let url = `http://api.openweathermap.org/data/2.5/weather/?q=${city},${country}&&appid=${API_KEY}&units=metric`;
-  console.log(url);
   request(url, function(err, response, body) {
     if (err) {
       res.render("index", { error: "Error, please try again" });
     } else {
       let weather = JSON.parse(body);
-
-      console.log("21", weather);
       if (weather.main === undefined) {
         res.render("index", {
           weather: null,
           error: "Error! Please try again later"
         });
       } else {
-        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}`;
-        console.log("38", weatherText);
+        let weatherText = `It's ${weather.main.temp} degrees Celsius in ${weather.name}`;
         res.render("index", { weather: weatherText, error: null });
       }
     }
